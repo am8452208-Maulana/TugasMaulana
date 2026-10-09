@@ -50,3 +50,42 @@ Jawaban pertanyaan Langkah 1:
 3. == membandingkan nilai dengan kemungkinan konversi tipe, sedangkan === membandingkan nilai dan tipe data.
 */
 
+// ==================================================
+// LANGKAH 2: PERBAIKI 4 KESALAHAN
+// ==================================================
+
+const hargaKopi = 18000;
+const hargaTeh = 7500;
+let jumlahMember = 5;
+let sudahMember = true;
+let uangDiterima = 51000;
+
+// FIX 1: Dua kopi dan dua teh harus dihitung dengan benar.
+let totalPesanan = (hargaKopi * 2) + (hargaTeh * 2);
+console.log("Total pesanan:", totalPesanan);
+
+// FIX 2: Gunakan angka agar tipe datanya sama saat memakai ===.
+let uangPas = uangDiterima === totalPesanan;
+console.log("Uang pas:", uangPas);
+
+// FIX 3: Gunakan += agar jumlah member benar-benar bertambah.
+jumlahMember += 1;
+console.log("Jumlah member:", jumlahMember);
+
+// FIX 4: Gunakan OR (||), sesuai syarat member ATAU total di atas 100000.
+let dapatDiskon = sudahMember || totalPesanan > 100000;
+console.log("Dapat diskon:", dapatDiskon);
+
+// Hasil: 51000 true 6 true
+console.log(totalPesanan, uangPas, jumlahMember, dapatDiskon);
+
+/*
+Jawaban pertanyaan Langkah 2:
+1. Kesalahan pertama adalah rumus total salah, sehingga diperbaiki menjadi dua kopi ditambah dua teh.
+   Kesalahan kedua adalah uang diterima menggunakan tipe string, sehingga diubah menjadi angka.
+   Kesalahan ketiga adalah jumlahMember + 1 tidak menyimpan perubahan, sehingga diperbaiki menjadi += 1.
+   Kesalahan keempat adalah menggunakan &&, padahal syarat diskon memakai ATAU, sehingga diganti ||.
+2. Jika memakai ===, kedua nilai harus memiliki tipe yang sama. Ubah "51000" menjadi angka 51000 agar hasilnya true.
+3. && berarti kedua kondisi harus benar, sedangkan || cukup salah satu kondisi benar.
+*/
+

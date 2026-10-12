@@ -331,3 +331,33 @@ if (kasirUangBayar > kasirTotalAkhir) {
 //
 // Ketiga skenario menguji diskon 5%, 10%, dan 15%,
 // promo default, akhir pekan, dan Jumat, serta tiga status pembayaran.
+
+// ==================================================
+// BONUS: JUMLAH HARI DALAM BULAN
+// ==================================================
+
+const bonusNomorBulan = 2;
+
+switch (bonusNomorBulan) {
+  case 4:
+  case 6:
+  case 9:
+  case 11:
+    console.log("Jumlah hari: 30");
+    break;
+  case 2:
+    console.log("Jumlah hari: 28 atau 29");
+    break;
+  case 1:
+  case 3:
+  case 5:
+  case 7:
+  case 8:
+  case 10:
+  case 12:
+    console.log("Jumlah hari: 31");
+    break;
+  default:
+    console.log("Bulan tidak valid");
+    break;
+}

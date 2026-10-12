@@ -151,3 +151,130 @@ console.log(diskon, potonganMember, totalAkhir);
 // == untuk membandingkan nilai dengan kemungkinan konversi tipe.
 // === untuk membandingkan nilai dan tipe tanpa konversi.
 // Kode assignment tidak error karena = adalah operator JavaScript yang sah.
+
+// ==================================================
+// LANGKAH 3: BIKIN KASIR SENDIRI
+// ==================================================
+
+// DATA AWAL SKENARIO 1
+const kasirNamaPelanggan = "";
+const kasirTotalBelanja = 30000;
+const kasirHari = "senin";
+const kasirJenisMember = "biasa";
+const kasirKodeVoucher = "";
+const kasirUangBayar = 20000;
+
+// 1. DISKON BERDASARKAN TOTAL BELANJA
+let kasirDiskon;
+
+if (kasirTotalBelanja >= 100000) {
+  kasirDiskon = kasirTotalBelanja * 0.15;
+} else if (kasirTotalBelanja >= 50000) {
+  kasirDiskon = kasirTotalBelanja * 0.10;
+} else if (kasirTotalBelanja >= 25000) {
+  kasirDiskon = kasirTotalBelanja * 0.05;
+} else {
+  kasirDiskon = 0;
+}
+
+// 2. POTONGAN MEMBER
+let kasirPotonganMember;
+
+switch (kasirJenisMember) {
+  case "gold":
+    kasirPotonganMember = 5000;
+    break;
+  case "silver":
+    kasirPotonganMember = 2000;
+    break;
+  default:
+    kasirPotonganMember = 0;
+    break;
+}
+
+// 3. PROMO HARI
+let kasirPotonganHari;
+
+switch (kasirHari) {
+  case "jumat":
+    kasirPotonganHari = 3000;
+    break;
+  case "sabtu":
+  case "minggu":
+    // Kedua case memakai potongan yang sama.
+    // Tidak perlu break di antara sabtu dan minggu.
+    kasirPotonganHari = 5000;
+    break;
+  default:
+    kasirPotonganHari = 0;
+    break;
+}
+
+// 4. VALIDASI NAMA DENGAN TRUTHY/FALSY
+if (kasirNamaPelanggan) {
+  console.log(`Pelanggan: ${kasirNamaPelanggan}`);
+} else {
+  console.log("Nama pelanggan belum diisi");
+}
+
+// 5. VOUCHER DENGAN TRUTHY/FALSY
+let kasirPotonganVoucher;
+
+if (kasirKodeVoucher) {
+  kasirPotonganVoucher = 2000;
+  console.log(`Voucher dipakai: ${kasirKodeVoucher}`);
+} else {
+  kasirPotonganVoucher = 0;
+  console.log("Voucher tidak dipakai");
+}
+
+// 6. HITUNG TOTAL AKHIR
+const kasirTotalAkhir =
+  kasirTotalBelanja -
+  kasirDiskon -
+  kasirPotonganMember -
+  kasirPotonganHari -
+  kasirPotonganVoucher;
+
+// 7. CETAK RINCIAN DAN STATUS PEMBAYARAN
+console.log(`
+========== STRUK KASIR ==========
+Total belanja     : Rp${kasirTotalBelanja}
+Diskon            : Rp${kasirDiskon}
+Potongan member   : Rp${kasirPotonganMember}
+Promo hari        : Rp${kasirPotonganHari}
+Potongan voucher  : Rp${kasirPotonganVoucher}
+Total akhir       : Rp${kasirTotalAkhir}
+Uang bayar        : Rp${kasirUangBayar}
+`);
+
+if (kasirUangBayar > kasirTotalAkhir) {
+  const kasirKembalian = kasirUangBayar - kasirTotalAkhir;
+  console.log(`Status: Lunas`);
+  console.log(`Kembalian: Rp${kasirKembalian}`);
+} else if (kasirUangBayar === kasirTotalAkhir) {
+  console.log("Status: Lunas (uang pas)");
+} else {
+  const kasirKekurangan = kasirTotalAkhir - kasirUangBayar;
+  console.log("Status: Kurang");
+  console.log(`Kekurangan: Rp${kasirKekurangan}`);
+}
+
+// JAWABAN PERTANYAAN LANGKAH 3
+//
+// 1. Diskon terbesar diperiksa dahulu agar belanja Rp100000 tidak
+//    berhenti pada syarat Rp25000. Jika dibalik, diskon 5% bisa terpilih
+//    sebelum diskon 10% atau 15% diperiksa.
+//
+// 2. switch cocok untuk membandingkan satu variabel hari dengan beberapa
+//    nilai tetap. Kodenya lebih rapi dan mudah dibaca.
+//
+// 3. break sengaja tidak ditulis di antara case sabtu dan minggu.
+//    Keduanya menggunakan potongan Rp5000, lalu break menghentikan switch.
+//
+// 4. Nilai Falsy untuk nama antara lain "", null, dan undefined.
+//    Nilai lain yang juga Falsy adalah 0, -0, NaN, dan false.
+//
+// 5. Jika jumlahBeli = -1, if (jumlahBeli) bernilai Truthy karena -1
+//    bukan nol. Namun if (jumlahBeli > 0) bernilai false karena -1
+//    tidak lebih besar dari nol.

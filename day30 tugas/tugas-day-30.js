@@ -74,3 +74,80 @@ switch (hari) {
   default:
     console.log("Tidak ada promo");
 }
+// ==================================================
+// LANGKAH 2: PERBAIKI 5 KESALAHAN
+// ==================================================
+
+let totalBelanja = 80000;
+let jenisMember = "gold";
+let kodeVoucher = "";
+let diskon;
+let potonganMember;
+
+// FIX 1: Periksa nominal terbesar terlebih dahulu.
+// Seharusnya diskon 10% = 8000.
+if (totalBelanja >= 100000) {
+  diskon = totalBelanja * 0.15;
+} else if (totalBelanja >= 50000) {
+  diskon = totalBelanja * 0.10;
+} else if (totalBelanja >= 25000) {
+  diskon = totalBelanja * 0.05;
+} else {
+  diskon = 0;
+}
+
+// FIX 2: Nama variabel harus sama persis: jenisMember.
+// FIX 3: Tambahkan break agar member gold tidak jatuh ke silver.
+switch (jenisMember) {
+  case "gold":
+    potonganMember = 5000;
+    break;
+  case "silver":
+    potonganMember = 2000;
+    break;
+  default:
+    potonganMember = 0;
+}
+
+// FIX 4: Gunakan pemeriksaan kondisi, bukan assignment (=).
+// String kosong adalah Falsy sehingga voucher tidak digunakan.
+if (kodeVoucher === "") {
+  console.log("Voucher tidak dipakai");
+} else {
+  console.log("Voucher dipakai: " + kodeVoucher);
+}
+
+// Total akhir
+let totalAkhir = totalBelanja - diskon - potonganMember;
+
+// FIX 5: Gunakan >= agar pembayaran yang sama dengan total
+// juga dinyatakan lunas.
+let uangBayar = 67000;
+
+if (uangBayar >= totalAkhir) {
+  console.log("Status: Lunas");
+} else {
+  console.log("Status: Kurang");
+}
+
+console.log(diskon, potonganMember, totalAkhir);
+
+// Jawaban 5 kesalahan:
+// 1. Urutan diskon salah; nominal terbesar harus diperiksa dahulu.
+// 2. jenismember salah penulisan; seharusnya jenisMember.
+// 3. Case gold tidak memiliki break sehingga nilainya tertimpa silver.
+// 4. Operator = mengisi nilai, bukan membandingkan; gunakan ===.
+// 5. Operator > tidak menerima uang pas; gunakan >=.
+//
+// Error atau hasil salah:
+// - jenismember menyebabkan ReferenceError karena variabel tidak ditemukan.
+// - Kesalahan urutan diskon, break, dan operator pembayaran tidak
+//   harus menyebabkan error, tetapi menghasilkan nilai atau status salah.
+// - Assignment pada kondisi tidak menyebabkan error sintaks, tetapi
+//   mengubah nilai variabel dan menghasilkan kondisi yang tidak tepat.
+//
+// Perbedaan operator:
+// =  untuk memberikan nilai.
+// == untuk membandingkan nilai dengan kemungkinan konversi tipe.
+// === untuk membandingkan nilai dan tipe tanpa konversi.
+// Kode assignment tidak error karena = adalah operator JavaScript yang sah.

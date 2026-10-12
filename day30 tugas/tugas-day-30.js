@@ -278,3 +278,56 @@ if (kasirUangBayar > kasirTotalAkhir) {
 // 5. Jika jumlahBeli = -1, if (jumlahBeli) bernilai Truthy karena -1
 //    bukan nol. Namun if (jumlahBeli > 0) bernilai false karena -1
 //    tidak lebih besar dari nol.
+
+// ==================================================
+// CATATAN UJI 3 SKENARIO
+// ==================================================
+//
+// Jalankan program dengan mengganti enam nilai DATA AWAL di atas.
+//
+// SKENARIO 1 (nilai aktif pada kode):
+// Nama: "" | Belanja: 30000 | Hari: senin
+// Member: biasa | Voucher: "" | Bayar: 20000
+//
+// Hasil:
+// Nama pelanggan belum diisi
+// Voucher tidak dipakai
+// Diskon: 1500
+// Potongan member: 0
+// Promo hari: 0
+// Potongan voucher: 0
+// Total akhir: 28500
+// Status: Kurang
+// Kekurangan: 8500
+//
+// SKENARIO 2 (ganti nilai DATA AWAL):
+// Nama: "Rina" | Belanja: 90000 | Hari: sabtu
+// Member: silver | Voucher: "SENJA10" | Bayar: 80000
+//
+// Hasil:
+// Pelanggan: Rina
+// Voucher dipakai: SENJA10
+// Diskon: 9000
+// Potongan member: 2000
+// Promo hari: 5000
+// Potongan voucher: 2000
+// Total akhir: 72000
+// Status: Lunas
+// Kembalian: 8000
+//
+// SKENARIO 3 (ganti nilai DATA AWAL):
+// Nama: "Budi" | Belanja: 120000 | Hari: jumat
+// Member: gold | Voucher: "HEMAT" | Bayar: 92000
+//
+// Hasil:
+// Pelanggan: Budi
+// Voucher dipakai: HEMAT
+// Diskon: 18000
+// Potongan member: 5000
+// Promo hari: 3000
+// Potongan voucher: 2000
+// Total akhir: 92000
+// Status: Lunas (uang pas)
+//
+// Ketiga skenario menguji diskon 5%, 10%, dan 15%,
+// promo default, akhir pekan, dan Jumat, serta tiga status pembayaran.

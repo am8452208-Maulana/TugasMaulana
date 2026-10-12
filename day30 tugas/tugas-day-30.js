@@ -1,79 +1,198 @@
-
 /*
-Nama       : Ahmad Maulana
-Tugas      : Day 30 - Kasir Warung dengan Percabangan
-Materi     : if, else if, else, switch, Truthy/Falsy
+Nama: Ahmad Maulana
+Tujuan: Eksperimen operator, tipe data, var, dan let.
 */
 
-// ==================================================
-// LANGKAH 1: TEBAK DULU, BARU CEK
-// ==================================================
+// 5.1 Eksperimen operator dan tipe data
 
-// POTONGAN A
-// Tebakan: yang tercetak adalah 2, 4, dan 6.
-// Hasil asli: 2, 4, dan 6.
+// Tebakan: Hasilnya "55" karena angka 5 digabung dengan string "5".
+// Hasil asli: "55"
+console.log(5 + "5");
 
-if (0) {
-  console.log("1: masuk");
+// Tebakan: Hasilnya 6 karena string "10" diubah menjadi angka.
+// Hasil asli: 6
+console.log("10" - 4);
+
+// Tebakan: Hasilnya 20 karena kedua string diubah menjadi angka.
+// Hasil asli: 20
+console.log("10" * "2");
+
+// Tebakan: Hasilnya "string" karena penjumlahan menghasilkan string.
+// Hasil asli: "string"
+console.log(typeof ("5" + 5));
+
+// Tebakan: Hasilnya 1 karena sisa pembagian 9 dengan 4 adalah 1.
+// Hasil asli: 1
+console.log(9 % 4);
+
+// Tebakan: Hasilnya 25 karena 2 + 3 dihitung dahulu, lalu dipangkatkan 2.
+// Hasil asli: 25
+console.log((2 + 3) ** 2);
+
+// Tebakan: Hasilnya 2.5 karena 10 dibagi 4.
+// Hasil asli: 2.5
+console.log(10 / 4);
+
+// Tebakan: Hasilnya Infinity karena angka 1 dibagi 0.
+// Hasil asli: Infinity
+console.log(1 / 0);
+
+// Tebakan: Hasilnya NaN karena string "abc" tidak bisa menjadi angka.
+// Hasil asli: NaN
+console.log("abc" * 2);
+
+// Tebakan: Hasilnya "number" karena NaN termasuk tipe number.
+// Hasil asli: "number"
+console.log(typeof NaN);
+
+// Tebakan: Hasilnya true karena kondisi 1 === 1 benar.
+// Hasil asli: true
+console.log((5 > 3 && 2 > 4) || 1 === 1);
+
+// Tebakan: Hasilnya true karena !true adalah false dan !false adalah true.
+// Hasil asli: true
+console.log(!true || !false);
+
+// Tebakan: Hasilnya true karena "5" == 5 benar dan "5" !== 5 juga benar.
+// Hasil asli: true
+console.log("5" == 5 && "5" !== 5);
+
+// Tebakan: Hasilnya true karena array dan object biasa sama-sama bertipe object.
+// Hasil asli: true
+console.log(typeof [] === typeof {});
+
+// Tebakan: Hasilnya 50 karena elemen indeks 1 adalah 20 dan indeks 2 adalah 30.
+// Hasil asli: 50
+console.log([10, 20, 30][1] + [10, 20, 30][2]);
+
+
+// 5.2 Eksperimen var dan let
+
+// A. var di dalam blok tetap bisa dibaca dari luar blok.
+
+{
+    var namaVar = "Ahmad";
 }
-if ("0") {
-  console.log("2: masuk");
-}
-if ("") {
-  console.log("3: masuk");
-}
-if ([]) {
-  console.log("4: masuk");
-}
-if (null) {
-  console.log("5: masuk");
-}
-if (-1) {
-  console.log("6: masuk");
+
+console.log(namaVar);
+// Hasil asli: Husain
+
+
+// B. let di dalam blok tidak bisa dibaca dari luar blok.
+
+{
+    let namaLet = "Maul";
 }
 
-// Jawaban pertanyaan:
-// 1. "0" adalah string yang tidak kosong, sedangkan [] adalah array kosong.
-//    Keduanya termasuk Truthy sehingga kondisi if dijalankan.
-// 2. Potongan B memeriksa >= 25000 terlebih dahulu. Karena 120000 juga
-//    memenuhi syarat itu, program langsung memilih diskon 5%.
-//    Perbaikan: periksa 100000, lalu 50000, lalu 25000.
-// 3. Potongan C mencetak dua baris karena tidak ada break setelah case
-//    "sabtu". Tambahkan break agar hanya satu promo yang dicetak.
+// Tebakan: Akan terjadi ReferenceError karena namaLet hanya berlaku di dalam blok.
+// Hasil asli jika baris diaktifkan: ReferenceError: namaLet is not defined
 
-// POTONGAN B
-let belanja = 120000;
+// console.log(namaLet);
 
-// Tebakan: Diskon 5% karena syarat pertama sudah terpenuhi.
-// Hasil asli: Diskon 5%.
 
-if (belanja >= 25000) {
-  console.log("Diskon 5%");
-} else if (belanja >= 50000) {
-  console.log("Diskon 10%");
-} else if (belanja >= 100000) {
-  console.log("Diskon 15%");
-} else {
-  console.log("Tidak ada diskon");
-}
+// C. var dengan nama sama dapat dideklarasikan dua kali.
 
-// POTONGAN C
-let hari = "sabtu";
+var umur = 20;
+var umur = 21;
 
-// Tebakan: Promo Akhir Pekan dan Promo Keluarga.
-// Hasil asli: Promo Akhir Pekan dan Promo Keluarga.
+console.log(umur);
+// Hasil asli: 21
 
-switch (hari) {
-  case "jumat":
-    console.log("Promo Jumat Berkah");
-  case "sabtu":
-    console.log("Promo Akhir Pekan");
-  case "minggu":
-    console.log("Promo Keluarga");
-    break;
-  default:
-    console.log("Tidak ada promo");
-}
+
+// D. let dengan nama sama tidak dapat dideklarasikan dua kali
+// dalam lingkup yang sama.
+
+// Tebakan: Akan terjadi SyntaxError karena nama variabel let dideklarasikan ulang.
+// Hasil asli jika baris diaktifkan:
+// SyntaxError: Identifier 'umurLet' has already been declared
+
+let umurLet = 20;
+// let umurLet = 21;
+
+
+// 5.3 Penjelasan
+
+// 1. 5 + "5" menghasilkan string "55" karena operator +
+// menggabungkan angka dengan string.
+// "10" - 4 menghasilkan angka 6 karena operator -
+// mengubah string angka menjadi number untuk melakukan pengurangan.
+
+
+// 2. NaN berarti Not-a-Number, yaitu hasil perhitungan numerik
+// yang tidak menghasilkan angka valid.
+// Tipenya tetap "number" karena NaN merupakan nilai khusus
+// dalam tipe data Number di JavaScript.
+
+
+// 3. Urutan evaluasi:
+// 5 > 3 menghasilkan true.
+// 2 > 4 menghasilkan false.
+// true && false menghasilkan false.
+// 1 === 1 menghasilkan true.
+// false || true menghasilkan true.
+// Jadi, hasil akhirnya adalah true.
+
+
+// 4. Array dan object biasa sama-sama menghasilkan "object"
+// ketika diperiksa menggunakan typeof.
+// Untuk membedakan array, gunakan Array.isArray(data).
+// Contoh:
+// Array.isArray([10, 20, 30]) menghasilkan true.
+// Array.isArray({ nama: "Husain" }) menghasilkan false.
+
+
+// 5. let hasil = 5 + 10;
+// Statement: deklarasi variabel dan pemberian nilai ke hasil.
+// Expression 5 + 10 bernilai 15.
+// Expression hasil * 2 bernilai 30.
+// console.log(hasil * 2) menampilkan 30.
+
+
+// 6. File eksperimen.js dapat dijalankan di browser melalui
+// HTML yang memuat script.js atau langsung melalui Node.js.
+// Browser menjalankan JavaScript di lingkungan browser,
+// sedangkan Node.js menjalankannya di lingkungan di luar browser.
+// let dan const digunakan karena memiliki lingkup blok
+// dan membantu mencegah deklarasi ulang yang tidak disengaja.
+
+
+// 7. Hasil eksperimen:
+// var dari dalam blok bisa dibaca dari luar.
+// let dari dalam blok tidak bisa dibaca dari luar.
+// var boleh dideklarasikan ulang dalam lingkup yang sama.
+// let tidak boleh dideklarasikan ulang dalam lingkup yang sama.
+
+
+// 8. Contoh bug pada program besar:
+// Sebuah program menggunakan var total di dalam blok
+// untuk menyimpan total transaksi sementara.
+// Karena var tidak dibatasi oleh blok, nilainya dapat mengubah
+// total transaksi yang digunakan oleh bagian program lain.
+// Deklarasi ulang var juga dapat tanpa sengaja mengganti nilai
+// variabel yang sebelumnya digunakan oleh fungsi lain.
+
+// JAWABAN SAYA 
+
+//Potongan A :
+// a. Kosong wak
+// b. Masuk
+// c. Kosong wak
+// d. Masuk
+// e. Kosong wak
+// f. Masuk
+
+// POTONGAN B JAWABAN MAUL:
+// Diskon 5%
+
+// JAWABAN POTONGAN C
+// jawaban : promo akhir pekan dan promo keluarga
+
+// Jawaban easy :
+
+// 1.Karena nilai tersebut di nilai truthy yaitu true
+// 2.Conlose.log nya pindah keatas di bagian if dan jangan di bagian else if
+// 3.Hapus breaknya
+
 // ==================================================
 // LANGKAH 2: PERBAIKI 5 KESALAHAN
 // ==================================================

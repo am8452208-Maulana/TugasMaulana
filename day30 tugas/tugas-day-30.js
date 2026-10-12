@@ -438,6 +438,7 @@ if (kasirUangBayar > kasirTotalAkhir) {
 // Nama: "Budi" | Belanja: 120000 | Hari: jumat
 // Member: gold | Voucher: "HEMAT" | Bayar: 92000
 //
+//
 // Hasil:
 // Pelanggan: Budi
 // Voucher dipakai: HEMAT

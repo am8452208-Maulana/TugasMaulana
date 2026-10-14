@@ -195,3 +195,122 @@ console.log(hitungTotal(80000, 8800));
 //    function declaration, sedangkan hitungPajak memakai
 //    arrow function, tetapi keduanya tetap membutuhkan
 //    return untuk mengembalikan hasil.
+
+
+// ******************************************************
+// LANGKAH 3: MEMBUAT PROGRAM KASIR SENDIRI
+// ******************************************************
+
+// DATA MENU DAN HARGA
+const kasirNamaMenu = [
+    "Kopi Susu",
+    "Es Teh",
+    "Roti Bakar",
+    "Nasi Goreng",
+    "Jus Jeruk"
+];
+
+const kasirHargaMenu = [
+    18000,
+    7500,
+    15000,
+    22000,
+    12000
+];
+
+let kasirKeranjang = [];
+
+// FUNCTION 1: FUNCTION DECLARATION
+// Mencari harga berdasarkan nama menu.
+function kasirCariHarga(namaMenu) {
+    const indeksMenu = kasirNamaMenu.indexOf(namaMenu);
+
+    if (indeksMenu === -1) {
+        return 0;
+    }
+
+    return kasirHargaMenu[indeksMenu];
+}
+
+// Contoh pemanggilan function declaration sebelum
+// pendefinisiannya tetap bisa bekerja karena hoisting:
+// console.log(kasirCariHarga("Kopi Susu"));
+// Hasil: 18000
+
+// FUNCTION 2: FUNCTION EXPRESSION
+// Menjumlahkan harga semua menu di keranjang.
+//
+// Jika baris berikut dipindahkan ke atas, sebelum deklarasi
+// const kasirHitungSubtotal, akan muncul ReferenceError:
+// Cannot access 'kasirHitungSubtotal' before initialization.
+//
+// console.log(kasirHitungSubtotal());
+
+const kasirHitungSubtotal = function () {
+    let subtotal = 0;
+
+    for (let i = 0; i < kasirKeranjang.length; i++) {
+        subtotal += kasirCariHarga(kasirKeranjang[i]);
+    }
+
+    return subtotal;
+};
+
+// FUNCTION 3: ARROW FUNCTION DENGAN RETURN
+// Menentukan besarnya diskon sesuai subtotal.
+const kasirHitungDiskon = (subtotal) => {
+    if (subtotal >= 100000) {
+        return subtotal * 0.15;
+    } else if (subtotal >= 50000) {
+        return subtotal * 0.10;
+    } else if (subtotal >= 25000) {
+        return subtotal * 0.05;
+    } else {
+        return 0;
+    }
+};
+
+// FUNCTION 4: ARROW FUNCTION DENGAN NILAI DEFAULT
+// Tarif pajak default adalah 11%.
+const kasirHitungPajak = (nilai, tarif = 0.11) =>
+    nilai * tarif;
+
+// FUNCTION 5: MENCETAK STRUK
+// Template literal digunakan agar struk lebih rapi.
+function kasirCetakStruk(subtotal, diskon, pajak) {
+    const totalAkhir = subtotal - diskon + pajak;
+
+    console.log("\n================================");
+    console.log("       KEDAI PAPUA RASA");
+    console.log("================================");
+    console.log("DAFTAR BELANJA:");
+
+    for (let i = 0; i < kasirKeranjang.length; i++) {
+        const namaMenu = kasirKeranjang[i];
+        const hargaMenu = kasirCariHarga(namaMenu);
+
+        console.log(
+            `${i + 1}. ${namaMenu} - Rp${hargaMenu.toLocaleString("id-ID")}`
+        );
+    }
+
+    console.log("--------------------------------");
+    console.log(`Subtotal : Rp${subtotal.toLocaleString("id-ID")}`);
+    console.log(`Diskon   : Rp${diskon.toLocaleString("id-ID")}`);
+    console.log(`Pajak    : Rp${pajak.toLocaleString("id-ID")}`);
+    console.log("--------------------------------");
+    console.log(`TOTAL    : Rp${totalAkhir.toLocaleString("id-ID")}`);
+    console.log("================================");
+}
+
+// BONUS: MEMBATALKAN MENU
+function kasirBatalkanItem(namaMenu) {
+    const indeksItem = kasirKeranjang.indexOf(namaMenu);
+
+    if (indeksItem !== -1) {
+        kasirKeranjang.splice(indeksItem, 1);
+        return true;
+    }
+
+    return false;
+}

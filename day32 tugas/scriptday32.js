@@ -314,3 +314,78 @@ function kasirBatalkanItem(namaMenu) {
 
     return false;
 }
+
+// ------------------------------------------------------
+// DEMONSTRASI ARRAY METHOD
+// ------------------------------------------------------
+
+console.log("\n===== DEMONSTRASI ARRAY =====");
+
+console.log("Sebelum push:", kasirKeranjang);
+
+kasirKeranjang.push("Kopi Susu");
+kasirKeranjang.push("Es Teh");
+kasirKeranjang.push("Roti Bakar");
+kasirKeranjang.push("Nasi Goreng");
+
+console.log("Sesudah push:", kasirKeranjang);
+
+// unshift menambahkan menu prioritas di bagian depan.
+kasirKeranjang.unshift("Jus Jeruk");
+console.log("Sesudah unshift:", kasirKeranjang);
+
+// pop membatalkan satu menu paling belakang.
+kasirKeranjang.pop();
+console.log("Sesudah pop:", kasirKeranjang);
+
+// shift membatalkan menu paling depan.
+kasirKeranjang.shift();
+console.log("Sesudah shift:", kasirKeranjang);
+
+// splice mengganti satu item pada indeks 1.
+kasirKeranjang.splice(1, 1, "Jus Jeruk");
+console.log("Sesudah splice:", kasirKeranjang);
+
+// includes mengecek apakah menu tersedia di keranjang.
+console.log(
+    "Apakah ada Kopi Susu?",
+    kasirKeranjang.includes("Kopi Susu")
+);
+
+// slice mengambil tiga item pertama tanpa mengubah array asli.
+const kasirPaketCepat = kasirKeranjang.slice(0, 3);
+
+console.log("Paket cepat:", kasirPaketCepat);
+console.log("Keranjang asli:", kasirKeranjang);
+
+// ------------------------------------------------------
+// SKENARIO 1: SUBTOTAL MENDAPAT DISKON 10%
+// ------------------------------------------------------
+
+console.log("\n===== SKENARIO 1 =====");
+
+kasirKeranjang = [
+    "Kopi Susu",
+    "Es Teh",
+    "Roti Bakar",
+    "Nasi Goreng"
+];
+
+const kasirSubtotalSatu = kasirHitungSubtotal();
+const kasirDiskonSatu = kasirHitungDiskon(kasirSubtotalSatu);
+const kasirPajakSatu = kasirHitungPajak(
+    kasirSubtotalSatu - kasirDiskonSatu
+);
+
+kasirCetakStruk(
+    kasirSubtotalSatu,
+    kasirDiskonSatu,
+    kasirPajakSatu
+);
+
+// Hasil skenario 1:
+// Keranjang: Kopi Susu, Es Teh, Roti Bakar, Nasi Goreng
+// Subtotal: Rp62.500
+// Diskon 10%: Rp6.250
+// Pajak 11% dari Rp56.250: Rp6.187,5
+// Total: Rp62.437,5

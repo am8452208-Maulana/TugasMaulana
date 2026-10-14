@@ -123,3 +123,75 @@ console.log("C4:", cekAngka(5));
 //    tetap bisa digunakan tanpa argumen kedua. Console.log
 //    setelah return tidak tercetak karena baris return
 //    langsung menghentikan function.
+
+
+// ******************************************************
+// LANGKAH 2: PERBAIKI 7 KESALAHAN
+// ******************************************************
+
+let daftarBelanja = ["Kopi", "Teh", "Roti"];
+
+// FIX 1: push menambahkan Susu di bagian akhir.
+daftarBelanja.push("Susu");
+
+// FIX 2: splice menghapus elemen dari array asli.
+daftarBelanja.splice(1, 1);
+
+// FIX 3: includes menghasilkan true atau false.
+let adaRoti = daftarBelanja.includes("Roti");
+
+// FIX 4: indeks terakhir adalah panjang array dikurangi 1.
+let terakhir = daftarBelanja[daftarBelanja.length - 1];
+
+// FIX 5: return mengembalikan hasil perhitungan diskon.
+function hitungDiskon(harga, persen) {
+    return harga - (harga * persen) / 100;
+}
+
+// FIX 6: return diperlukan agar nilai pajak dikembalikan.
+const hitungPajak = (subtotal) => {
+    return subtotal * 0.11;
+};
+
+// FIX 7: deklarasikan function expression sebelum dipanggil.
+const hitungTotal = (subtotal, pajak) => subtotal + pajak;
+
+console.log(daftarBelanja, adaRoti, terakhir);
+console.log(hitungDiskon(100000, 20));
+console.log(hitungPajak(80000));
+console.log(hitungTotal(80000, 8800));
+
+// Hasil yang diharapkan:
+// ["Kopi", "Roti", "Susu"] true Susu
+// 80000
+// 8800
+// 88800
+
+// Jawaban pertanyaan Langkah 2:
+//
+// 1. Kesalahan pertama memakai unshift, diperbaiki menjadi
+//    push agar Susu masuk di akhir daftar.
+//    Kesalahan kedua memakai slice, diperbaiki menjadi
+//    splice agar Teh benar-benar terhapus.
+//    Kesalahan ketiga memakai indexOf, diperbaiki menjadi
+//    includes agar hasilnya berupa true atau false.
+//    Kesalahan keempat memakai length tanpa dikurangi 1,
+//    diperbaiki menjadi length - 1.
+//    Kesalahan kelima tidak memakai return pada hitungDiskon,
+//    sehingga diperbaiki dengan menambahkan return.
+//    Kesalahan keenam tidak memakai return pada hitungPajak,
+//    sehingga hasil perhitungannya tidak dikembalikan.
+//    Kesalahan ketujuh memanggil hitungTotal sebelum
+//    deklarasi const-nya, jadi deklarasinya dipindahkan
+//    ke atas sebelum pemanggilan.
+//
+// 2. Kesalahan pemanggilan hitungTotal sebelum deklarasi
+//    const menyebabkan ReferenceError. Kesalahan lain
+//    umumnya tidak menimbulkan error, tetapi membuat hasil
+//    atau perubahan array tidak sesuai harapan.
+//
+// 3. Keduanya dapat menghasilkan undefined jika tidak
+//    mengembalikan nilai. Function hitungDiskon memakai
+//    function declaration, sedangkan hitungPajak memakai
+//    arrow function, tetapi keduanya tetap membutuhkan
+//    return untuk mengembalikan hasil.

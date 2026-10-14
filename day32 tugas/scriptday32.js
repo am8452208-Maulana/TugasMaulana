@@ -5,9 +5,9 @@ Tugas      : Day 32 JavaScript
 Materi     : Array Method, Function, Return, dan Kasir
 */
 
-// ======================================================
+// ********************************
 // LANGKAH 1: TEBAK DULU, BARU CEK
-// ======================================================
+// ********************************
 
 // --------------------
 // POTONGAN A
@@ -49,3 +49,30 @@ console.log("A8:", menu[menu.length - 1]);
 // Kesimpulan:
 // splice() mengubah array asli, sedangkan slice()
 // membuat array baru tanpa mengubah array asl
+
+// *******************
+//  JAWABAN POTONGAN B
+// *******************
+
+// Tebakan:
+// 5, undefined
+// cetakTambah mencetak 5 terlebih dahulu.
+
+function tambah(a, b) {
+    return a + b;
+}
+
+function cetakTambah(a, b) {
+    console.log(a + b);
+}
+
+let x = tambah(2, 3);
+let y = cetakTambah(2, 3);
+
+console.log("B1:", x);
+console.log("B2:", y);
+
+// Hasil asli:
+// 5       <- dari cetakTambah
+// B1: 5
+// B2: undefined

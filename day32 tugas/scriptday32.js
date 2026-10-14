@@ -50,9 +50,9 @@ console.log("A8:", menu[menu.length - 1]);
 // splice() mengubah array asli, sedangkan slice()
 // membuat array baru tanpa mengubah array asl
 
-// *******************
+// ***************************
 //  JAWABAN POTONGAN B
-// *******************
+// ***************************
 
 // Tebakan:
 // 5, undefined
@@ -76,3 +76,50 @@ console.log("B2:", y);
 // 5       <- dari cetakTambah
 // B1: 5
 // B2: undefined
+
+
+// ********************
+// POTONGAN C
+// ********************
+
+// Tebakan:
+// 40000, 45000, negatif, bukan negatif
+
+const hitungDiskonPersen = (harga, persen = 10) =>
+    harga - (harga * persen) / 100;
+
+console.log("C1:", hitungDiskonPersen(50000, 20));
+console.log("C2:", hitungDiskonPersen(50000));
+
+function cekAngka(n) {
+    if (n < 0) {
+        return "negatif";
+        console.log("Baris ini muncul atau tidak?");
+    }
+
+    return "bukan negatif";
+}
+
+console.log("C3:", cekAngka(-5));
+console.log("C4:", cekAngka(5));
+
+// Hasil asli:
+// C1: 40000
+// C2: 45000
+// C3: negatif
+// C4: bukan negatif
+
+// Jawaban pertanyaan Langkah 1:
+//
+// 1. menu berubah karena push, unshift, pop, shift, dan
+//    splice mengubah array asli. Slice hanya mengambil
+//    sebagian elemen dan menghasilkan array baru.
+//
+// 2. tambah mengembalikan hasil menggunakan return,
+//    sedangkan cetakTambah hanya mencetak hasilnya.
+//    Karena tidak memiliki return, nilai y adalah undefined.
+//
+// 3. Parameter persen memiliki nilai default 10 sehingga
+//    tetap bisa digunakan tanpa argumen kedua. Console.log
+//    setelah return tidak tercetak karena baris return
+//    langsung menghentikan function.

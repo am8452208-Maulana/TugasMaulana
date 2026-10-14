@@ -389,3 +389,94 @@ kasirCetakStruk(
 // Diskon 10%: Rp6.250
 // Pajak 11% dari Rp56.250: Rp6.187,5
 // Total: Rp62.437,5
+
+
+// ------------------------------------------------------
+// SKENARIO 2: SUBTOTAL MENDAPAT DISKON 15%
+// ------------------------------------------------------
+
+console.log("\n===== SKENARIO 2 =====");
+
+kasirKeranjang = [
+    "Nasi Goreng",
+    "Nasi Goreng",
+    "Nasi Goreng",
+    "Nasi Goreng",
+    "Kopi Susu"
+];
+
+const kasirSubtotalDua = kasirHitungSubtotal();
+const kasirDiskonDua = kasirHitungDiskon(kasirSubtotalDua);
+const kasirPajakDua = kasirHitungPajak(
+    kasirSubtotalDua - kasirDiskonDua
+);
+
+kasirCetakStruk(
+    kasirSubtotalDua,
+    kasirDiskonDua,
+    kasirPajakDua
+);
+
+// Hasil skenario 2:
+// Keranjang: 4 Nasi Goreng dan 1 Kopi Susu
+// Subtotal: Rp106.000
+// Diskon 15%: Rp15.900
+// Pajak 11% dari Rp90.100: Rp9.911
+// Total: Rp100.011
+
+// ------------------------------------------------------
+// UJI BONUS: MEMBATALKAN ITEM
+// ------------------------------------------------------
+
+console.log("\n===== UJI BONUS =====");
+
+console.log(
+    "Batalkan Kopi Susu:",
+    kasirBatalkanItem("Kopi Susu")
+);
+// Hasil: true karena menu ditemukan dan dihapus.
+
+console.log(
+    "Batalkan Burger:",
+    kasirBatalkanItem("Burger")
+);
+// Hasil: false karena menu tidak ditemukan.
+
+// ======================================================
+// JAWABAN PERTANYAAN LANGKAH 3
+// ======================================================
+
+// 1. push mengubah array asli. Buktinya, keranjang sebelum
+//    push kosong dan sesudah push berisi empat menu.
+//
+// 2. splice mengubah array asli untuk menghapus atau
+//    mengganti elemen. Slice membuat array baru, contohnya
+//    kasirPaketCepat = kasirKeranjang.slice(0, 3).
+//
+// 3. kasirCariHarga memakai return supaya harga bisa dipakai
+//    oleh function lain. Jika diganti console.log, function
+//    itu tidak mengembalikan harga sehingga subtotal bisa
+//    menjadi tidak benar karena menerima undefined.
+//
+// 4. Parameter adalah namaMenu dalam deklarasi function.
+//    Argumen adalah "Kopi Susu" saat function dipanggil.
+//
+// 5. kasirHitungPajak punya nilai default 0.11, sehingga
+//    satu argumen memakai pajak 11%. Jika argumen kedua
+//    diberikan, tarif yang diberikan akan digunakan.
+//
+// 6. Function expression yang disimpan dalam const belum
+//    bisa dipanggil sebelum deklarasinya dijalankan dan
+//    menghasilkan ReferenceError. Function declaration
+//    bisa dipanggil lebih awal karena hoisting.
+//
+//    Percobaan yang tidak dijalankan:
+//    console.log(kasirHitungSubtotal());
+//    Jika diletakkan sebelum deklarasi const, hasilnya:
+//    ReferenceError: Cannot access 'kasirHitungSubtotal'
+//    before initialization.
+//
+//    Percobaan function declaration:
+//    console.log(kasirCariHarga("Kopi Susu"));
+//    Jika diletakkan sebelum deklarasi function, hasilnya
+//    tetap 18000 karena function declaration di-hoist.

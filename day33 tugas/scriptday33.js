@@ -100,3 +100,47 @@ Jawaban:
    milik dompet secara langsung. this merujuk pada dompet ketika
    method dipanggil sebagai dompet.belanja().
 */
+
+// ---------------- POTONGAN C ----------------
+
+const hari = ["Senin", "Selasa"];
+
+// Tebakan: Senin, lalu Selasa
+// Hasil asli: Senin, lalu Selasa
+for (let nilai of hari) {
+    console.log(nilai);
+}
+
+// Tebakan: 0, lalu 1
+// Hasil asli: 0, lalu 1
+for (let indeks in hari) {
+    console.log(indeks);
+}
+
+const kopi = { nama: "Kopi", harga: 18000 };
+
+// Tebakan: nama: Kopi, harga: 18000
+// Hasil asli: nama: Kopi, harga: 18000
+for (let kolom in kopi) {
+    console.log(kolom + ": " + kopi[kolom]);
+}
+
+// Tebakan: K, o, p, i
+// Hasil asli: K, o, p, i
+for (let huruf of "Kopi") {
+    console.log(huruf);
+}
+
+// Percobaan error:
+// Tebakan: error karena object biasa tidak iterable.
+// Setelah dicoba, baris ini dijadikan komentar.
+// Pesan umum: TypeError: kopi is not iterable.
+// for (let x of kopi) { console.log(x); }
+
+/*
+Jawaban:
+3. for...in pada array menghasilkan indeks berupa string,
+   sedangkan for...of menghasilkan nilai array.
+   Object kopi tidak bisa langsung dipakai dengan for...of
+   karena object biasa tidak menyediakan iterator bawaan.
+*/

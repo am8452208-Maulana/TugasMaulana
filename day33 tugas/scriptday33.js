@@ -359,3 +359,82 @@ const kasirKedai = {
         return daftarMenipis;
     }
 };
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// PROPERTI DINAMIS
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+const namaProperti = "website";
+
+kasirKedai[namaProperti] = "https://kedai-papua-rasa.example";
+
+console.log("Website tersedia:", "website" in kasirKedai);
+
+delete kasirKedai[namaProperti];
+
+console.log("Website tersedia:", "website" in kasirKedai);
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// FOR...IN DAN OBJECT.KEYS / OBJECT.VALUES
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+console.log("\nJam operasional:");
+
+for (let kunci in kasirKedai.jamOperasional) {
+    console.log(
+        kunci + ": " + kasirKedai.jamOperasional[kunci]
+    );
+}
+
+console.log("\nMenu pertama:");
+
+for (let kunci in kasirKedai.menu[0]) {
+    console.log(kunci + ": " + kasirKedai.menu[0][kunci]);
+}
+
+console.log(
+    "Keys:",
+    Object.keys(kasirKedai.jamOperasional)
+);
+
+console.log(
+    "Values:",
+    Object.values(kasirKedai.jamOperasional)
+);
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// MENGHITUNG HURUF a
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+let jumlahHurufA = 0;
+
+for (let huruf of kasirKedai.nama) {
+    if (huruf === "a") {
+        jumlahHurufA++;
+    }
+}
+
+console.log("Jumlah huruf a:", jumlahHurufA);
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// SKENARIO 1: DISKON 10%
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// Kopi Susu x2 = Rp36.000
+// Roti Bakar x1 = Rp15.000
+// Es Teh x2 = Rp15.000
+// Subtotal = Rp66.000
+// Diskon 10% = Rp6.600
+// Pajak 11% = Rp6.534
+// Total = Rp65.934
+
+console.log("\n===== SKENARIO 1 =====");
+
+console.log(kasirKedai.tambahKeKeranjang("Kopi Susu", 2));
+console.log(kasirKedai.tambahKeKeranjang("Roti Bakar", 1));
+console.log(kasirKedai.tambahKeKeranjang("Es Teh", 2));
+
+kasirKedai.cetakStruk();
+
+// Kosongkan keranjang untuk transaksi kedua.
+kasirKedai.keranjang = [];

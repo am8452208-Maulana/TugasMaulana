@@ -56,3 +56,47 @@ Jawaban:
    sedangkan produk[kunci] memakai nilai variabel kunci.
    produk.stok menjadi undefined karena properti stok dihapus.
 */
+
+// ---------------- POTONGAN B ----------------
+
+const dompet = {
+    pemilik: "Rina",
+    saldo: 50000,
+
+    belanja(jumlah) {
+        this.saldo -= jumlah;
+        return this.saldo;
+    },
+
+    cekSaldo() {
+        console.log(this.pemilik + ": Rp " + this.saldo);
+    },
+};
+
+// Tebakan: 30000
+// Hasil asli: 30000
+let sisa = dompet.belanja(20000);
+console.log(sisa);
+
+// Tebakan: Rina: Rp 30000
+// Hasil asli: Rina: Rp 30000
+dompet.cekSaldo();
+
+// Tebakan: saldo berkurang menjadi 20000
+// Hasil asli: tidak dicetak oleh pemanggilan ini
+dompet.belanja(10000);
+
+// Tebakan: Rina: Rp 20000
+// Hasil asli: Rina: Rp 20000
+dompet.cekSaldo();
+
+// Tebakan: 20000
+// Hasil asli: 20000
+console.log(dompet.saldo);
+
+/*
+Jawaban:
+2. Saldo tetap berubah karena belanja() mengubah properti saldo
+   milik dompet secara langsung. this merujuk pada dompet ketika
+   method dipanggil sebagai dompet.belanja().
+*/

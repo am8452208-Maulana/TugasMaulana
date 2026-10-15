@@ -438,3 +438,76 @@ kasirKedai.cetakStruk();
 
 // Kosongkan keranjang untuk transaksi kedua.
 kasirKedai.keranjang = [];
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// SKENARIO 2: DISKON 15%
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+// Nasi Goreng x3 = Rp66.000
+// Kopi Susu x3 = Rp54.000
+// Total subtotal = Rp120.000
+// Diskon 15% = Rp18.000
+// Pajak 11% dari Rp102.000 = Rp11.220
+// Total = Rp113.220
+
+console.log("\n===== SKENARIO 2 =====");
+
+console.log(kasirKedai.tambahKeKeranjang("Nasi Goreng", 3));
+console.log(kasirKedai.tambahKeKeranjang("Kopi Susu", 3));
+
+kasirKedai.cetakStruk();
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// DUA KASUS GAGAL
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+kasirKedai.keranjang = [];
+
+console.log(
+    "Menu tidak ditemukan:",
+    kasirKedai.tambahKeKeranjang("Papeda", 1)
+); // false
+
+console.log(
+    "Stok tidak cukup:",
+    kasirKedai.tambahKeKeranjang("Kopi Susu", 999)
+); // false
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// BONUS: MENU MENIPIS
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+console.log(
+    "Menu stok kurang dari 5:",
+    kasirKedai.menuMenipis()
+);
+
+/*
+JAWABAN PERTANYAAN LANGKAH 3
+
+1. Dot notation memakai titik, misalnya kasirKedai.nama.
+   Bracket notation memakai kurung siku, misalnya kasirKedai[namaProperti].
+   Bracket notation diperlukan untuk nama key dinamis atau key bertanda hubung.
+
+2. this.saldoKas mengakses saldo milik object kasirKedai.
+   Tanpa this, JavaScript mencari variabel saldoKas di luar object
+   dan dapat menghasilkan ReferenceError jika variabel itu tidak ada.
+
+3. for...of mengambil nilai array atau karakter string.
+   for...in mengambil key object atau indeks array.
+   Menu memakai for...of karena kita perlu membaca setiap item.
+
+4. Array dan string dapat memakai for...of karena iterable.
+   Object biasa tidak bisa langsung dipakai dengan for...of.
+   Pesan error umumnya: TypeError: kasirKedai is not iterable.
+
+5. Object.keys menghasilkan nama properti.
+   Object.values menghasilkan nilai properti.
+   Contohnya ['buka', 'tutup'] dan ['08:00', '21:00'].
+
+6. cariHarga dan hitungSubtotal memakai return agar hasilnya
+   dapat dipakai untuk perhitungan lain.
+   cetakStruk boleh tidak mengembalikan nilai karena tugasnya
+   mencetak struk. Jika subtotal hanya memakai console.log,
+   hasil pemanggilan hitungSubtotal menjadi undefined.
+*/

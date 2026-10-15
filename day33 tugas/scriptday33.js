@@ -144,3 +144,79 @@ Jawaban:
    Object kopi tidak bisa langsung dipakai dengan for...of
    karena object biasa tidak menyediakan iterator bawaan.
 */
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// LANGKAH 2: PERBAIKI 7 KESALAHAN
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+const warung = {
+    nama: "Warung Senja",
+    saldoKas: 100000,
+
+    // FIX 1: gunakan this.saldoKas agar properti object berubah.
+    tambahKas(jumlah) {
+        this.saldoKas += jumlah;
+    },
+
+    // FIX 2: return diperlukan agar sisa saldo bisa dikembalikan.
+    ambilKas(jumlah) {
+        this.saldoKas -= jumlah;
+        return this.saldoKas;
+    },
+};
+
+warung.tambahKas(50000);
+console.log(warung.saldoKas); // 150000
+console.log(warung.ambilKas(30000)); // 120000
+
+// FIX 3: bracket notation wajib untuk key yang mengandung tanda hubung.
+const kontak = { "no-wa": "08123" };
+console.log(kontak["no-wa"]); // 08123
+
+// FIX 4: delete menghapus properti, bukan sekadar mengubah nilainya.
+const akun = { nama: "Rina", kataSandi: "abc123" };
+delete akun.kataSandi;
+console.log(akun); // { nama: 'Rina' }
+
+// Bukti perbedaan undefined dan delete.
+const akunUji = { nama: "Rina", kataSandi: "abc123" };
+akunUji.kataSandi = undefined;
+
+console.log("kataSandi" in akunUji); // true
+delete akunUji.kataSandi;
+console.log("kataSandi" in akunUji); // false
+
+// FIX 5: for...of mengambil nilai array, bukan indeksnya.
+const menu = ["Kopi", "Teh", "Roti"];
+for (let item of menu) {
+    console.log(item);
+}
+
+// FIX 6: for...in digunakan untuk menelusuri key object biasa.
+const info = { nama: "Warung Senja", kota: "Yogyakarta" };
+for (let kolom in info) {
+    console.log(kolom + ": " + info[kolom]);
+}
+
+// FIX 7: nama method yang benar adalah Object.keys().
+console.log(Object.keys(info)); // [ 'nama', 'kota' ]
+
+/*
+Tujuh kesalahan dan perbaikannya:
+1. saldoKas tanpa this salah merujuk variabel; gunakan this.saldoKas.
+2. ambilKas tidak mengembalikan nilai; tambahkan return.
+3. kontak.no-wa salah dibaca sebagai operasi pengurangan; gunakan [].
+4. Mengisi kataSandi dengan undefined tidak menghapus key; gunakan delete.
+5. for...in menghasilkan indeks; gunakan for...of untuk nilai array.
+6. for...of tidak bisa langsung menelusuri object biasa; gunakan for...in.
+7. Object.key tidak ada; gunakan Object.keys.
+
+Error:
+- Kesalahan 1 dapat menghasilkan ReferenceError jika saldoKas
+  tidak didefinisikan di luar object.
+- Kesalahan 3 dapat menghasilkan ReferenceError karena wa tidak ada.
+- Kesalahan 6 menghasilkan TypeError karena object tidak iterable.
+- Kesalahan 2, 4, 5, dan 7 tidak semuanya berupa error:
+  hasilnya dapat berupa undefined atau hasil yang tidak sesuai.
+  Object.key sendiri menghasilkan TypeError karena bukan function.
+*/

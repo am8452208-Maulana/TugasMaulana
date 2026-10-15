@@ -220,3 +220,142 @@ Error:
   hasilnya dapat berupa undefined atau hasil yang tidak sesuai.
   Object.key sendiri menghasilkan TypeError karena bukan function.
 */
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// LANGKAH 3: KASIR KEDAI PAPUA RASA
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+const PAJAK = 0.11;
+
+const kasirKedai = {
+    nama: "Kedai Papua Rasa",
+    pemilik: "Ahmad Maulana",
+    kota: "Serui",
+    saldoKas: 0,
+
+    jamOperasional: {
+        buka: "08:00",
+        tutup: "21:00"
+    },
+
+    menu: [
+        { nama: "Kopi Susu", kategori: "minuman", harga: 18000, stok: 10 },
+        { nama: "Es Teh", kategori: "minuman", harga: 7500, stok: 10 },
+        { nama: "Roti Bakar", kategori: "makanan", harga: 15000, stok: 8 },
+        { nama: "Nasi Goreng", kategori: "makanan", harga: 22000, stok: 8 },
+        { nama: "Jus Jeruk", kategori: "minuman", harga: 12000, stok: 10 }
+    ],
+
+    keranjang: [],
+
+    // Mencari harga menu. Jika tidak ditemukan, hasilnya 0.
+    cariHarga(namaMenu) {
+        for (let item of this.menu) {
+            if (item.nama === namaMenu) {
+                return item.harga;
+            }
+        }
+        return 0;
+    },
+
+    // Memasukkan pesanan jika menu tersedia dan stok cukup.
+    tambahKeKeranjang(namaMenu, jumlah) {
+        for (let item of this.menu) {
+            if (
+                item.nama === namaMenu &&
+                item.stok >= jumlah &&
+                jumlah > 0
+            ) {
+                this.keranjang.push({
+                    nama: namaMenu,
+                    jumlah: jumlah
+                });
+
+                item.stok -= jumlah;
+                return true;
+            }
+        }
+        return false;
+    },
+
+    // Menghitung total harga seluruh pesanan.
+    hitungSubtotal() {
+        let subtotal = 0;
+
+        for (let item of this.keranjang) {
+            subtotal += this.cariHarga(item.nama) * item.jumlah;
+        }
+
+        return subtotal;
+    },
+
+    // Diskon berdasarkan jumlah belanja.
+    hitungDiskon(subtotal) {
+        if (subtotal >= 100000) {
+            return subtotal * 0.15;
+        } else if (subtotal >= 50000) {
+            return subtotal * 0.10;
+        } else if (subtotal >= 25000) {
+            return subtotal * 0.05;
+        }
+
+        return 0;
+    },
+
+    // Mencetak struk dan menambahkan total ke saldo kas.
+    cetakStruk() {
+        const subtotal = this.hitungSubtotal();
+        const diskon = this.hitungDiskon(subtotal);
+        const setelahDiskon = subtotal - diskon;
+        const pajak = setelahDiskon * PAJAK;
+        const total = setelahDiskon + pajak;
+
+        console.log("\n==================================");
+        console.log("       KEDAI PAPUA RASA");
+        console.log("==================================");
+        console.log("Pemilik : " + this.pemilik);
+        console.log("Kota    : " + this.kota);
+        console.log("----------------------------------");
+
+        let nomor = 1;
+
+        for (let item of this.keranjang) {
+            const harga = this.cariHarga(item.nama);
+            const jumlahHarga = harga * item.jumlah;
+
+            console.log(
+                nomor + ". " + item.nama +
+                " x" + item.jumlah
+            );
+            console.log(
+                "   Harga: Rp " + harga +
+                " | Total: Rp " + jumlahHarga
+            );
+
+            nomor++;
+        }
+
+        console.log("----------------------------------");
+        console.log("Subtotal : Rp " + subtotal.toFixed(2));
+        console.log("Diskon   : Rp " + diskon.toFixed(2));
+        console.log("Pajak 11%: Rp " + pajak.toFixed(2));
+        console.log("TOTAL    : Rp " + total.toFixed(2));
+        console.log("==================================");
+
+        this.saldoKas += total;
+        return total;
+    },
+
+    // Bonus: mencari menu dengan stok kurang dari 5.
+    menuMenipis() {
+        const daftarMenipis = [];
+
+        for (let item of this.menu) {
+            if (item.stok < 5) {
+                daftarMenipis.push(item.nama);
+            }
+        }
+
+        return daftarMenipis;
+    }
+};

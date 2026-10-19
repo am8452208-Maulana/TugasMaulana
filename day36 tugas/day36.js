@@ -1,13 +1,13 @@
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // NAMA: Ahmad Maulana
 // TUGAS: DAY 35
 // MATERI: SCOPE, HOISTING, CLOSURE
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // LANGKAH 1: TEBAK DULU, BARU CEK
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // POTONGAN A
 
@@ -115,9 +115,9 @@ Jawaban Langkah 1:
    penghitungA dan penghitungB memiliki hitungan masing-masing.
 */
 
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // LANGKAH 2: PERBAIKI 8 KESALAHAN
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // FIX 1: Variabel dibuat di luar blok agar dapat digunakan.
 
@@ -225,9 +225,9 @@ Shadowing adalah ketika variabel lokal menutupi variabel luar.
 */
 
 
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // LANGKAH 3: BIKIN KASIR SENDIRI
-// ==========================================
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // Function declaration bisa dipanggil sebelum definisi.
 cetakJudul();
@@ -385,4 +385,32 @@ Jawaban Langkah 3:
 4. TARIF_PAJAK diakses melalui lexical scope.
 5. Function declaration bisa dipanggil awal, const expression tidak.
 6. Function diskon mengingat persen melalui closure.
+*/
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+// BONUS: LET DAN VAR
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+const fungsiLet = [];
+
+for (let i = 0; i < 3; i++) {
+    fungsiLet.push(() => i);
+}
+
+console.log(fungsiLet[0](), fungsiLet[1](), fungsiLet[2]());
+// Hasil: 0 1 2
+
+const fungsiVar = [];
+
+for (var j = 0; j < 3; j++) {
+    fungsiVar.push(() => j);
+}
+
+console.log(fungsiVar[0](), fungsiVar[1](), fungsiVar[2]());
+// Hasil: 3 3 3
+
+/*
+Penjelasan:
+let menyimpan nilai i yang berbeda pada setiap putaran.
+var menggunakan satu variabel j yang akhirnya bernilai 3.
 */

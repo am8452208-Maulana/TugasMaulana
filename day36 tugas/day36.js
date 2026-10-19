@@ -223,3 +223,166 @@ Error muncul saat variabel belum tersedia atau di luar scope.
 Kesalahan lain dapat berjalan tetapi memberikan hasil yang salah.
 Shadowing adalah ketika variabel lokal menutupi variabel luar.
 */
+
+
+// ==========================================
+// LANGKAH 3: BIKIN KASIR SENDIRI
+// ==========================================
+
+// Function declaration bisa dipanggil sebelum definisi.
+cetakJudul();
+
+const NAMA_WARUNG = "Daeng Punya ";
+const TARIF_PAJAK = 0.11;
+
+function cetakJudul() {
+    console.log(NAMA_WARUNG.toUpperCase());
+}
+
+// Percobaan function expression sebelum deklarasi:
+// cetakJudulEkspresi();
+// const cetakJudulEkspresi = function () {
+//     console.log("Judul");
+// };
+// Error: Cannot access 'cetakJudulEkspresi' before initialization
+
+
+function buatKasir(namaKasir, modalAwal) {
+    // Data privat disimpan di dalam closure.
+    let saldoKas = modalAwal;
+    let jumlahTransaksi = 0;
+    let riwayat = [];
+
+    return {
+        catatPenjualan(namaMenu, harga, jumlah) {
+            const subtotal = harga * jumlah;
+            const pajak = subtotal * TARIF_PAJAK;
+            const totalPenjualan = subtotal + pajak;
+
+            saldoKas += totalPenjualan;
+            jumlahTransaksi++;
+
+            riwayat.push({
+                namaMenu,
+                jumlah,
+                total: totalPenjualan
+            });
+
+            return totalPenjualan;
+        },
+
+        ambilKas(jumlah) {
+            if (jumlah > saldoKas) {
+                return false;
+            }
+
+            saldoKas -= jumlah;
+            return true;
+        },
+
+        cekSaldo() {
+            return saldoKas;
+        },
+
+        lihatRiwayat() {
+            return riwayat.slice();
+        },
+
+        ringkasan() {
+            console.log(
+                `Kasir: ${namaKasir} | Transaksi: ${jumlahTransaksi} | Saldo: Rp${saldoKas.toFixed(0)}`
+            );
+        }
+    };
+}
+
+
+// Membuat dua kasir.
+
+const kasirPagi = buatKasir("Rina", 100000);
+const kasirMalam = buatKasir("Dodi", 50000);
+
+
+// Tiga penjualan kasir pagi.
+
+console.log(kasirPagi.catatPenjualan("Nasi Goreng", 15000, 2));
+console.log(kasirPagi.catatPenjualan("Es Teh", 5000, 3));
+console.log(kasirPagi.catatPenjualan("Roti Bakar", 12000, 1));
+
+
+// Dua penjualan kasir malam.
+
+console.log(kasirMalam.catatPenjualan("Mie Goreng", 13000, 2));
+console.log(kasirMalam.catatPenjualan("Jus Mangga", 10000, 1));
+
+
+// Pengambilan kas berhasil dan gagal.
+
+console.log(kasirPagi.ambilKas(20000)); // true
+console.log(kasirPagi.ambilKas(999999)); // false
+
+
+// Ringkasan kedua kasir.
+
+kasirPagi.ringkasan();
+kasirMalam.ringkasan();
+
+
+// Membuktikan saldo privat.
+
+console.log(kasirPagi.saldoKas); // undefined
+
+kasirPagi.saldoKas = 999999;
+
+console.log(kasirPagi.cekSaldo()); // 142820
+
+// Saldo privat tidak berubah walaupun property biasa dibuat.
+
+
+// Membuktikan riwayat merupakan salinan.
+
+const salinanRiwayat = kasirPagi.lihatRiwayat();
+
+salinanRiwayat.push({
+    namaMenu: "Menu Palsu",
+    jumlah: 1,
+    total: 1
+});
+
+console.log(kasirPagi.lihatRiwayat().length); // 3
+
+
+// Function factory untuk menghitung diskon.
+
+function buatPenghitungDiskon(persen) {
+    return (harga) => harga - harga * persen;
+}
+
+const diskon10 = buatPenghitungDiskon(0.10);
+const diskon25 = buatPenghitungDiskon(0.25);
+
+console.log(diskon10(80000)); // 72000
+console.log(diskon25(80000)); // 60000
+
+
+// Shadowing.
+
+const suasana = "global";
+
+function cekSuasana() {
+    const suasana = "lokal";
+    console.log(suasana); // lokal
+}
+
+console.log(suasana); // global
+cekSuasana();
+
+/*
+Jawaban Langkah 3:
+1. saldoKas tidak menjadi property object, tetapi tetap diingat closure.
+2. Setiap kasir punya lingkungan variabel dan saldo masing-masing.
+3. saldoKas, jumlahTransaksi, dan riwayat tetap diingat oleh closure.
+4. TARIF_PAJAK diakses melalui lexical scope.
+5. Function declaration bisa dipanggil awal, const expression tidak.
+6. Function diskon mengingat persen melalui closure.
+*/

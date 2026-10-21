@@ -1,0 +1,85 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    /* display:flexbox; */
+
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 300px ;
+    flex-direction: column;
+}
+h1 {
+    color:blueviolet;
+    font-size:3rem ;
+    margin-bottom: 20px;
+}
+form {
+    width: 400px;
+    border:1px solid rgba(255, 252, 252, 0.459);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgb(131, 220, 252);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+label input {
+    width: 300px;
+    padding:10px;
+    border: 1px solid rgba(0, 0, 0, 0.189);
+    border-radius: 10px;
+}
+.ingat {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.ingat input {
+    width: auto;
+    margin: 0;
+}
+
+button {
+    color: white;
+    width: 300px;
+    padding: 10px;
+    background-color: rgb(161, 161, 129);
+    border: 1px solid rgba(0, 0, 0, 0.169);
+    border-radius: 10px;
+    transition: 0.5s;
+}
+button:hover {
+    background-color: rgb(233, 15, 15);
+}
+button:focus {
+    background-color: rgb(245, 11, 11);
+}
+button:acive{
+    transform: scale(0.98);
+}
+a{
+    text-decoration: none;
+    color: rbg(0, 208, 255);
+    fons-size: 20px;
+    font-family: 'poppins' , sans-serif;
+    font-weight: bold;
+}
+body {
+    margin:0;
+    min-heigth: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.login {
+    width: 320px;
+    text-align: center;
+}
